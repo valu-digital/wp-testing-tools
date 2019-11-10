@@ -1,0 +1,21 @@
+{
+    "name": "valu/wp-tools",
+    "description": "Tools for WP development",
+    "type": "library",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Esa-Matti Suuronen",
+            "email": "esa-matti.suuronen@valu.fi",
+            "role": "developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/valu-digital/wp-tools/issues",
+        "source": "https://github.com/valu-digital/wp-tools"
+    },
+    "bin": [
+        "tools/wp-install",
+        "tools/wp-plugin-release"
+    ]
+}

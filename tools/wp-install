@@ -1,0 +1,217 @@
+#!/bin/sh
+
+set -eu
+
+help() {
+    echo "
+    Install WordPress
+
+    usage: $(basename $0) [options]
+
+    Options
+
+        --env-file  Path to a dot env file
+        --full      Do full installation. Only required for functional and acceptance tests
+
+
+    "
+}
+
+full_install=
+post_install_script=
+env_file=.env
+
+while true; do
+    case "${1:-}" in
+    -f|--full)
+        shift
+        full_install=1
+        ;;
+    --env-file)
+        shift
+        env_file="$1"
+        shift
+        ;;
+    --post-install)
+        shift
+        post_install_script="$1"
+        shift
+        ;;
+    -h|--help)
+        help && exit 0
+        ;;
+    "")
+        break
+        ;;
+    *)
+        >&2 echo "Unknown arg $1"
+        >&2 echo "See --help"
+        exit 2
+        ;;
+    esac
+done
+
+
+if [ ! -x "$(which jq)" ]; then
+	>&2 echo "jq cli tool missing"
+	exit 2
+fi
+
+if [ ! -f composer.json ]; then
+	>&2 echo "No composer.json?"
+	exit 1
+fi
+
+if [ ! -f composer.wp-install.json ]; then
+	>&2 echo "No composer.wp-install.json?"
+	exit 1
+fi
+
+if [ "$post_install_script" != "" ];then
+    if [ ! -x "$post_install_script" ]; then
+        >&2 echo "$post_install_script is not an executable"
+        exit 1
+    fi
+
+    # get absolute path
+    post_install_script="$(
+        cd "$(dirname "$post_install_script")"
+        echo "$(pwd)/$(basename "$post_install_script")"
+    )"
+fi
+
+if [ "$env_file" != "" ]; then
+    if [ ! -f "$env_file" ]; then
+        >&2 echo "Cannot read env file $env_file"
+        exit 1
+    fi
+
+    eval $(grep -v '^#' "$env_file")
+fi
+
+
+target="$WP_TOOLS_INSTALL_DIR"
+db_name="$WP_TOOLS_DB_NAME"
+db_user="$WP_TOOLS_DB_USER"
+db_password="$WP_TOOLS_DB_PASSWORD"
+
+if [ "$full_install" = "1" ]; then
+    wp_admin="$WP_TOOLS_SITE_ADMIN_USERNAME"
+    wp_admin_password="$WP_TOOLS_SITE_ADMIN_PASSWORD"
+    site_url="http://$WP_TOOLS_SITE_HOST"
+fi
+
+mkdir -p "$target"
+target="$(cd "$target" && pwd)" # get absolute path
+wp_core_dir="$target/web"
+src_dir="$(pwd)"
+
+type="$(jq -r .type composer.json)"
+
+if [ "$type" != "wordpress-plugin" ]; then
+	>&2 echo "Only wordpress plugins are supported for now. Set \"type\" to \"wordpress-plugin\" in composer.json"
+	exit 1
+fi
+
+project_name="$(jq -r .name composer.json  | cut -d / -f 2)"
+
+# Enables wp-cli packages defined in composer.wptest.json
+export WP_CLI_PACKAGES_DIR="$target"
+
+# put wp-cli and other composer installed tools to PATH
+export PATH="$(pwd)/vendor/bin:$PATH"
+
+mysql_cli() {
+    mysql --user="$db_user" --password="$db_password" $@
+}
+
+create_db() {
+    if [ "$(echo "SHOW DATABASES like '$db_name';" | mysql_cli | tail -n 1)" = "$db_name" ]; then
+        >&2 echo "Dropping existing database $db_name"
+        echo "DROP DATABASE $db_name;" | mysql_cli
+    fi
+
+    echo "CREATE DATABASE $db_name;" | mysql_cli
+}
+
+
+get_wp_core() {
+    (
+        mkdir -p "$wp_core_dir"
+        cd "$wp_core_dir"
+
+        wp core download
+
+        # Remove plugins shipped with the core
+        rm -rf wp-content/plugins/hello.php
+        rm -rf wp-content/plugins/akismet/
+    )
+}
+
+get_wp_plugins() {
+    (
+        cp composer.wp-install.json "$target/composer.json"
+        cd "$target"
+        composer install
+
+        ln -fs ../../../.. "${wp_core_dir}/wp-content/plugins/$project_name"
+    )
+}
+
+
+install_wp() {
+    (
+        cd "$wp_core_dir"
+
+        extra_php="require_once __DIR__ . '/../vendor/autoload.php';"
+
+        echo "$extra_php" | wp config create \
+            --dbname="$db_name" \
+            --dbuser="$db_user" \
+            --dbpass="$db_password" \
+            --force=true \
+            --extra-php
+
+
+        wp core install \
+            --url="$site_url" \
+            --title="Testing installation for $project_name" \
+            --admin_user="$wp_admin" \
+            --admin_password="$wp_admin_password" \
+            --admin_email=admin@wp.test \
+
+        wp rewrite structure '/%postname%/'
+
+        cd wp-content/plugins
+
+        # activate all plugins
+        for plugin in *; do
+            if [ -d "$plugin" ]; then
+                wp plugin activate "$plugin"
+            fi
+        done
+
+        cd "$wp_core_dir"
+
+        if [  "$post_install_script" != "" ]; then
+            "$post_install_script"
+        fi
+
+	    wp db export "$target/dump.sql"
+
+    )
+}
+
+if [ -d "$wp_core_dir" ]; then
+    >&2 echo "Removing existing installation from $target"
+    rm -rf "$target"
+    mkdir -p "$wp_core_dir"
+fi
+
+create_db
+get_wp_core
+get_wp_plugins
+
+if [ "$full_install" = "1" ]; then
+    install_wp
+fi
