@@ -10,8 +10,9 @@ help() {
 
     Options
 
-        --env-file  Path to a dot env file
-        --full      Do full installation. Only required for functional and acceptance tests
+        --env-file          Path to a dot env file
+        --full              Do full installation. Only required for functional and acceptance tests
+        --post-install      Path to a script which executed after the full installation in the wp directory
 
 
     "
