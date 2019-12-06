@@ -24,7 +24,7 @@ by file and explain the purpose of each.
 
 ### `composer.json`
 
-This is the main composer file which make your plugin installable using
+This is the main composer file which makes your plugin installable using
 Composer. Define any library dependencies of your plugin here but do not add
 other plugins here since your plugin users might want to install those by
 other means.
@@ -103,3 +103,40 @@ plugin properly to both composer and non-composer users.
 ## Using XDebug with Docker
 
 ### Visual Studio Code
+
+Use the [Remove - Containers][remote] and [PHP Debug][php] extensions.
+
+1. Add listen launch config
+
+```json
+{
+  "name": "PHP Listen for XDebug",
+  "type": "php",
+  "request": "launch",
+  "port": 9000
+}
+```
+
+2. Start the container with `docker/composer.sh` and once running select select
+   from quick menu (cmd/ctrl+p) "Remote-Container: Attach to Running
+   Container..." and selected your container ending with `-wp`.
+
+3. Once the container is opened to move to the `/app` directory using the "Open
+   Folder..." option in file menu.
+
+4. Enable the PHP Debug extension for the container
+
+5. Start the "PHP Listen for XDebug" launch config from the debug view
+
+6. Add breaks points
+
+7. Run the tests with `codecept run wpunit` from the VSCode terminal (No need to use `docker/shell.sh`!)
+
+8. Profit!
+
+[remote]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
+[php]: https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug
+
+```
+
+```
