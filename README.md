@@ -104,7 +104,7 @@ plugin properly to both composer and non-composer users.
 
 ### Visual Studio Code
 
-Use the [Remove - Containers][remote] and [PHP Debug][php] extensions.
+Use the [Remote - Containers][remote] and [PHP Debug][php] extensions.
 
 1. Add listen launch config
 
