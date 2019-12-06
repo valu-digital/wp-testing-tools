@@ -1,7 +1,7 @@
 # WP Testing Tools
 
 Testing WordPress plugins is PITA. The wp-browser project makes it possible
-but because it requires a working WordPress installation to work setting it
+but because it requires a working WordPress installation to work. Setting it
 up is very laborious. This project aims to automate that part.
 
 It contains following components:
