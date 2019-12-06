@@ -45,7 +45,9 @@ It takes few arguments
   This can be omitted when just doing wpunit tests.
 - `--wp-composer-file`: The `composer.json` file to use when installing
   WordPress
-- `--env-file` The .env file to use
+- `--env-file`: The .env file to use
+- The `--wp-composer-file` and `--env-file` arguments are optional and the
+  example is just showing the defaults
 
 ### `composer.wp-install.json`
 
