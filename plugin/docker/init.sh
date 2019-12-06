@@ -13,10 +13,10 @@ composer wp-install
 
 if [ -f init-docker.sh ]; then
     # Run the custom init if any
-    ./init-docker.sh
+    exec ./init-docker.sh
 fi
 
-if [ -f "${WP_TT_INSTALL_DIR}/web/wp-config.php" ]; then
+if [ "${WP_TT_INSTALL_DIR}" != "" -a -f "${WP_TT_INSTALL_DIR}/web/wp-config.php" ]; then
     >&2 echo "WP installed. You can access it from http://localhost:8080/ and run tests against it using ./docker/shell.sh"
     cd "${WP_TT_INSTALL_DIR}/web"
     exec wp server --host=0.0.0.0

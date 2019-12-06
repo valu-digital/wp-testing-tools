@@ -225,7 +225,7 @@ if [ -f "$success_flag" -a "$force" != "1" ]; then
     >&2 echo "WP install already ok. Skipping. Force reinstall with --force"
     exit 0
 else
-    >&2 echo "Removing broken installation from $target"
+    >&2 echo "Removing installation from $target (if any)"
     rm -rf "$target"
     mkdir -p "$wp_core_dir"
 fi

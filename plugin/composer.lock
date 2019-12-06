@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0dfec98fb962cd352ec40a674794c44d",
+    "content-hash": "872bc1c006b4f2eee16c8ff49f876cbf",
     "packages": [],
     "packages-dev": [
         {
@@ -5055,16 +5055,16 @@
         },
         {
             "name": "valu/wp-testing-tools",
-            "version": "v0.1.0",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/valu-digital/wp-testing-tools.git",
-                "reference": "3a162c415a717db788a8f509212bcd6dd1bfa14c"
+                "reference": "e58d498288b2459fd40278427715e21842bda9f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/valu-digital/wp-testing-tools/zipball/3a162c415a717db788a8f509212bcd6dd1bfa14c",
-                "reference": "3a162c415a717db788a8f509212bcd6dd1bfa14c",
+                "url": "https://api.github.com/repos/valu-digital/wp-testing-tools/zipball/e58d498288b2459fd40278427715e21842bda9f9",
+                "reference": "e58d498288b2459fd40278427715e21842bda9f9",
                 "shasum": ""
             },
             "bin": [
@@ -5084,7 +5084,7 @@
                 }
             ],
             "description": "Testing tools for WordPress",
-            "time": "2019-12-06T17:23:49+00:00"
+            "time": "2019-12-06T18:16:36+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
