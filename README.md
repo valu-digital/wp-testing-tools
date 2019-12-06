@@ -7,7 +7,7 @@ but because it requires a working WordPress installation to be usable and
 setting up one is very laborious which is why many plugins especially smaller
 ones omit tests completely. So the humble mission of this project is make
 that barrier go away completely so there would be no execuses to not write
-tests for WordPress plugins.
+tests for WordPress plugins! 💪
 
 This project contains following components:
 
