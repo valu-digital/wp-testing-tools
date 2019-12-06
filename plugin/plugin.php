@@ -14,7 +14,7 @@
  // users we must detect whether the project is using a global autolaoder. We
  // can do that by checking whether our autoloadable classes will autoload with
  // class_exists(). If not it means there's no global autoloader in place and
- // the user is not using composer. It that case we can safely require the
+ // the user is not using composer. In that case we can safely require the
  // bundled autoloader code.
  if (!\class_exists('\Example\Example')) {
     require_once __DIR__ . '/vendor/autoload.php';
