@@ -127,7 +127,7 @@ Use the [Remote - Containers][remote] and [PHP Debug][php] extensions.
 
 5. Start the `PHP Listen for XDebug` launch config from the debug view
 
-6. Add breaks points
+6. Add break points
 
 7. Run the tests with `codecept run wpunit` from the VSCode terminal (no need to use `docker/shell.sh`)
 
