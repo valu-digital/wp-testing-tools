@@ -32,7 +32,7 @@
     "optimize-autoloader": true
   },
   "support": {
-    "issues": "https://github.com/valu-digital/wp-graphql-lock/issues",
-    "source": "https://github.com/valu-digital/wp-graphql-lock"
+    "issues": "https://github.com/example/example/issues",
+    "source": "https://github.com/example/example"
   }
 }
