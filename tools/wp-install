@@ -13,6 +13,7 @@ help() {
         --env-file          Path to a dot env file
         --full              Do full installation. Only required for functional and acceptance tests
         --force             Force reinstallation
+        --serve             Serve the installation using wp-cli
         --wp-composer-file  Path to the composer.json file used for the wp installation. Defaults to composer.wp-install.json
         --post-install      Path to a script which executed after the full installation in the wp directory
 
@@ -25,6 +26,7 @@ post_install_script=
 env_file=.env
 wp_composer_file=composer.wp-install.json
 force=
+serve=
 
 while true; do
     case "${1:-}" in
@@ -51,6 +53,9 @@ while true; do
         post_install_script="$1"
         shift
         ;;
+    --serve)
+        shift
+        serve=1
     -h|--help)
         help && exit 0
         ;;
@@ -101,6 +106,16 @@ if [ "$env_file" != "" ]; then
     fi
 
     eval $(grep -v '^#' "$env_file")
+fi
+
+if [ "$serve" = "1" ]; then
+    if [ -f "${WPTT_INSTALL_DIR}/web/wp-config.php" ]; then
+        cd "${WPTT_INSTALL_DIR}/web"
+        exec wp server --host=0.0.0.0
+    fi
+
+    >&2 echo "Bad or non-full WP installation at ${WPTT_INSTALL_DIR}"
+    exit 3
 fi
 
 
