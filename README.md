@@ -106,7 +106,7 @@ plugin properly to both composer and non-composer users.
 
 Use the [Remote - Containers][remote] and [PHP Debug][php] extensions.
 
-1. Add listen launch config
+1. Add launch config
 
 ```json
 {
@@ -117,12 +117,11 @@ Use the [Remote - Containers][remote] and [PHP Debug][php] extensions.
 }
 ```
 
-2. Start the container with `docker/composer.sh` and once running select select
-   from quick menu (cmd/ctrl+p) "Remote-Container: Attach to Running
-   Container..." and selected your container ending with `-wp`.
+2. Start the container with `docker/composer.sh`. Once running select
+   "Remote-Container: Attach to Running Container..." from the quick menu
+   (cmd/ctrl+p) and selected your container ending with `-wp`.
 
-3. Once the container is opened to move to the `/app` directory using the "Open
-   Folder..." option in file menu.
+3. Move to the `/app` directory using the "Open Folder..." option
 
 4. Enable the PHP Debug extension for the container
 
@@ -130,9 +129,9 @@ Use the [Remote - Containers][remote] and [PHP Debug][php] extensions.
 
 6. Add breaks points
 
-7. Run the tests with `codecept run wpunit` from the VSCode terminal (No need to use `docker/shell.sh`!)
+7. Run the tests with `codecept run wpunit` from the VSCode terminal (no need to use `docker/shell.sh`)
 
-8. Profit!
+Profit!
 
 [remote]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
 [php]: https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug
