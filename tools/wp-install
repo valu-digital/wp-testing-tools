@@ -13,6 +13,7 @@ help() {
         --env-file          Path to a dot env file
         --full              Do full installation. Only required for functional and acceptance tests
         --force             Force reinstallation
+        --wp-composer-file  Path to the composer.json file used for the wp installation. Defaults to composer.wp-install.json
         --post-install      Path to a script which executed after the full installation in the wp directory
 
 
@@ -21,7 +22,8 @@ help() {
 
 full_install=
 post_install_script=
-env_file=
+env_file=.env
+wp_composer_file=composer.wp-install.json
 force=
 
 while true; do
@@ -37,6 +39,11 @@ while true; do
     --env-file)
         shift
         env_file="$1"
+        shift
+        ;;
+    --wp-composer-file)
+        shift
+        wp_composer_file="$1"
         shift
         ;;
     --post-install)
@@ -69,8 +76,8 @@ if [ ! -f composer.json ]; then
 	exit 1
 fi
 
-if [ ! -f composer.wp-install.json ]; then
-	>&2 echo "No composer.wp-install.json?"
+if [ ! -f "$wp_composer_file" ]; then
+	>&2 echo "Cannot find $wp_composer_file"
 	exit 1
 fi
 
@@ -159,7 +166,7 @@ get_wp_core() {
 
 get_wp_plugins() {
     (
-        cp composer.wp-install.json "$target/composer.json"
+        cp "$wp_composer_file" "$target/composer.json"
         cd "$target"
         composer install
 
