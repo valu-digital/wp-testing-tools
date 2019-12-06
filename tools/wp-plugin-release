@@ -40,6 +40,10 @@ git push origin master:master
 source="$(jq -r '.support.source' composer.json)"
 current_version="$(cat $version_file | sed -En 's/.*Version: ([^ ]*)/\1/p')"
 
+echo
+git log --format='- %s %h' "HEAD...v${current_version}" | sed 1,1d
+echo
+
 echo "Current version is: $current_version"
 
 read -p "New version> " new_version
