@@ -40,17 +40,6 @@ git push origin master:master
 source="$(jq -r '.support.source' composer.json)"
 current_version="$(cat $version_file | sed -En 's/.*Version: ([^ ]*)/\1/p')"
 
-range="v${new_version}...v${current_version}"
-
-echo
-echo
-git log --format='- %s %h' $range | sed 1,1d
-echo
-echo
-echo "All changes $source/compare/${range}"
-echo
-echo
-
 echo "Current version is: $current_version"
 
 read -p "New version> " new_version
@@ -65,6 +54,16 @@ git push origin master:master
 git push origin --tags
 git push origin master:stable -f
 
+range="v${new_version}...v${current_version}"
+
+echo
+echo
+git log --format='- %s %h' $range | sed 1,1d
+echo
+echo
+echo "All changes $source/compare/${range}"
+echo
+echo
 
 if [ "$(uname)" = "Darwin" ]; then
     set -x
