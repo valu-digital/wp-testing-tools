@@ -59,9 +59,11 @@ while true; do
     --serve)
         shift
         serve=1
+        ;;
     --status)
         shift
         print_status=1
+        ;;
     -h|--help)
         help && exit 0
         ;;
