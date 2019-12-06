@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -eu
+
+composer install
+
+export PATH="$(pwd)/vendor/bin:$PATH"
+
+cp .env.github .env
+
+eval $(grep -v '^#' .env)
+
+composer wp-install
+composer install
+
+wp-install --serve &
+
+composer test
