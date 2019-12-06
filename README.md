@@ -52,8 +52,8 @@ It takes few arguments
 ### `composer.wp-install.json`
 
 Since we cannot add WP plugin dependencies to the main `composer.json` we can
-add them here and they get installed and activated to the testing
-installation automatically.
+add them here and they get installed & activated to the testing installation
+automatically.
 
 ### `.env`
 
