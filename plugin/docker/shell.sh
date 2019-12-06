@@ -2,7 +2,7 @@
 
 set -eu
 
-eval $(grep -v '^#' .env)
+. docker/.prepare.sh
 
 command=$@
 
