@@ -1,4 +1,4 @@
 .env
 .wp-install
 _output
-vendor
+composer.lock
