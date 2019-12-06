@@ -2,10 +2,9 @@
 
 set -eu
 
-cp .env.github .env
-
 composer install
 
+cp .env.github .env
 export PATH="$(pwd)/vendor/bin:$PATH"
 
 composer wp-install
