@@ -6,7 +6,7 @@ Testing WordPress plugins is PITA. The wp-browser project makes it possible
 but it requires a working WordPress installation to be used. Unfortunately
 setting up one is very laborious which is why many especially smaller plugins
 omit tests completely. So the humble mission of this project is make that
-barrier go away completely so there would be no execuses to not write tests
+barrier go away completely so there would be no excuses to not write tests
 for WordPress plugins! 💪
 
 This project contains following components:
