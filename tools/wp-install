@@ -14,6 +14,7 @@ help() {
         --full              Do full installation. Only required for functional and acceptance tests
         --force             Force reinstallation
         --serve             Serve the installation using wp-cli
+        --status            Print the status of the installation. 'basic' 'full' or 'broken'
         --wp-composer-file  Path to the composer.json file used for the wp installation. Defaults to composer.wp-install.json
         --post-install      Path to a script which executed after the full installation in the wp directory
 
@@ -27,6 +28,8 @@ env_file=.env
 wp_composer_file=composer.wp-install.json
 force=
 serve=
+print_status=
+success_flag="$target/install_ok"
 
 while true; do
     case "${1:-}" in
@@ -56,6 +59,9 @@ while true; do
     --serve)
         shift
         serve=1
+    --status)
+        shift
+        print_status=1
     -h|--help)
         help && exit 0
         ;;
@@ -118,6 +124,20 @@ if [ "$serve" = "1" ]; then
     exit 3
 fi
 
+if [ "$print_status" = "1" ]; then
+    if [ ! -f "$success_flag" ]; then
+        echo broken
+        exit
+    fi
+
+    if [ -f "${WPTT_INSTALL_DIR}/web/wp-config.php" ]; then
+        echo full
+        exit
+    fi
+
+    echo basic
+    exit
+fi
 
 target="$WPTT_INSTALL_DIR"
 db_name="$WPTT_DB_NAME"
@@ -234,7 +254,6 @@ install_wp() {
     )
 }
 
-success_flag="$target/install_ok"
 
 if [ -f "$success_flag" -a "$force" != "1" ]; then
     >&2 echo "WP install already ok. Skipping. Force reinstall with --force"
