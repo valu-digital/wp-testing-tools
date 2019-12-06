@@ -1,10 +1,14 @@
 # WP Testing Tools
 
+WordPress testing for everyone! 🤗
+
 Testing WordPress plugins is PITA. The wp-browser project makes it possible
 but because it requires a working WordPress installation to be usable and
-setting up one is very laborious. This project aims to automate that part.
+setting up one is very laborious which is why many plugins especially smaller
+ones omit tests completely. So the humble mission of this project is make
+that barrier go away completely!
 
-It contains following components:
+This project contains following components:
 
 - A Composer installable script (`wp-install`) for installing WordPress into
   Docker containers, Github Actions or where ever.
@@ -12,8 +16,8 @@ It contains following components:
 - Github Action Workflow for continuous integration
 - Example plugin on how to setup all this
 
-The example plugin under the `plugin` directory. Lets go through it file by
-file and explain the purpose of each file.
+The example plugin is under the `plugin/` directory. Lets go through it file
+by file and explain the purpose of each.
 
 ### `composer.json`
 
@@ -29,7 +33,7 @@ But most interesting part is the `"wp-install"` script under `"scripts"`:
 
     wp-install --full --wp-composer-file composer.wp-install.json --env-file .env
 
-This `wp-install` tool is provided by this package it actually does the
+This `wp-install` tool is provided by this package and it actually does the
 WordPress installation using wp-cli.
 
 It takes few arguments
@@ -57,11 +61,11 @@ location for WordPress. Checkout their content for more information.
 The Codeception config. If you added WP plugins in `composer.wp-install.json`
 you must add them to the `modules.config.WPLoader.plugins` and
 `modules.config.WPLoader.activatePlugins` sections to be activated during
-wpunit testings.
+wpunit tests.
 
 ### `tests/`
 
-The directory containing the test. Please refer to the Codeception and
+The directory containing the tests. Please refer to the Codeception and
 wp-browser documention.
 
 ### `docker/`
@@ -73,7 +77,7 @@ extensions points. If you need some help customizing the Docker enviroment
 feel free to open an issue!
 
 This way the Docker enviroment is upgradeable. Just copy the latest version
-from this repository when you want to update the latest version.
+from this repository when you want to update to the latest version.
 
 The docker directory exposes two scripts for working with the enviroment:
 
