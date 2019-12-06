@@ -29,7 +29,6 @@ wp_composer_file=composer.wp-install.json
 force=
 serve=
 print_status=
-success_flag="$target/install_ok"
 
 while true; do
     case "${1:-}" in
@@ -116,6 +115,14 @@ if [ "$env_file" != "" ]; then
     eval $(grep -v '^#' "$env_file")
 fi
 
+target="$WPTT_INSTALL_DIR"
+success_flag="$target/install_ok"
+db_name="$WPTT_DB_NAME"
+db_user="$WPTT_DB_USER"
+db_password="$WPTT_DB_PASSWORD"
+db_host="$WPTT_DB_HOST"
+core_version="${WPTT_CORE_VERSION:-latest}"
+
 if [ "$serve" = "1" ]; then
     if [ -f "${WPTT_INSTALL_DIR}/web/wp-config.php" ]; then
         cd "${WPTT_INSTALL_DIR}/web"
@@ -141,12 +148,6 @@ if [ "$print_status" = "1" ]; then
     exit
 fi
 
-target="$WPTT_INSTALL_DIR"
-db_name="$WPTT_DB_NAME"
-db_user="$WPTT_DB_USER"
-db_password="$WPTT_DB_PASSWORD"
-db_host="$WPTT_DB_HOST"
-core_version="${WPTT_CORE_VERSION:-latest}"
 
 if [ "$full_install" = "1" ]; then
     wp_admin="$WPTT_SITE_ADMIN_USERNAME"
