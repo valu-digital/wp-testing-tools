@@ -12,6 +12,7 @@ help() {
 
         --env-file          Path to a dot env file
         --full              Do full installation. Only required for functional and acceptance tests
+        --force             Force reinstallation
         --post-install      Path to a script which executed after the full installation in the wp directory
 
 
@@ -20,13 +21,18 @@ help() {
 
 full_install=
 post_install_script=
-env_file=.env
+env_file=
+force=
 
 while true; do
     case "${1:-}" in
     -f|--full)
         shift
         full_install=1
+        ;;
+    --force)
+        shift
+        force=1
         ;;
     --env-file)
         shift
@@ -95,6 +101,7 @@ target="$WP_TOOLS_INSTALL_DIR"
 db_name="$WP_TOOLS_DB_NAME"
 db_user="$WP_TOOLS_DB_USER"
 db_password="$WP_TOOLS_DB_PASSWORD"
+db_host="$WP_TOOLS_DB_HOST"
 
 if [ "$full_install" = "1" ]; then
     wp_admin="$WP_TOOLS_SITE_ADMIN_USERNAME"
@@ -123,7 +130,7 @@ export WP_CLI_PACKAGES_DIR="$target"
 export PATH="$(pwd)/vendor/bin:$PATH"
 
 mysql_cli() {
-    mysql --user="$db_user" --password="$db_password" $@
+    mysql --host $db_host --user="$db_user" --password="$db_password" $@
 }
 
 create_db() {
@@ -170,6 +177,7 @@ install_wp() {
             --dbname="$db_name" \
             --dbuser="$db_user" \
             --dbpass="$db_password" \
+            --dbhost="$db_host" \
             --force=true \
             --extra-php
 
@@ -203,8 +211,13 @@ install_wp() {
     )
 }
 
-if [ -d "$wp_core_dir" ]; then
-    >&2 echo "Removing existing installation from $target"
+success_flag="$target/install_ok"
+
+if [ -f "$success_flag" -a "$force" != "1" ]; then
+    >&2 echo "WP install already ok. Skipping. Force reinstall with --force"
+    exit 0
+else
+    >&2 echo "Removing broken installation from $target"
     rm -rf "$target"
     mkdir -p "$wp_core_dir"
 fi
@@ -216,3 +229,5 @@ get_wp_plugins
 if [ "$full_install" = "1" ]; then
     install_wp
 fi
+
+date > "$success_flag"
