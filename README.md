@@ -135,7 +135,3 @@ Profit!
 
 [remote]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
 [php]: https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug
-
-```
-
-```
