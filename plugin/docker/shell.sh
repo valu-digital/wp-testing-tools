@@ -17,4 +17,4 @@ if [ "$command" = "" ]; then
     >&2 echo
 fi
 
-exec docker exec -it "${WP_TT_CONTAINER_NAME}-wp" $command
+exec docker exec -it "${WPTT_CONTAINER_NAME}-wp" $command

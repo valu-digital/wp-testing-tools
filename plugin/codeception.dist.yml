@@ -24,14 +24,14 @@ params:
 modules:
   config:
     WPLoader:
-      wpRootFolder: "%WP_TT_INSTALL_DIR%/web"
-      dbName: "%WP_TT_DB_NAME%"
-      dbHost: "%WP_TT_DB_HOST%"
-      dbUser: "%WP_TT_DB_USER%"
-      dbPassword: "%WP_TT_DB_PASSWORD%"
+      wpRootFolder: "%WPTT_INSTALL_DIR%/web"
+      dbName: "%WPTT_DB_NAME%"
+      dbHost: "%WPTT_DB_HOST%"
+      dbUser: "%WPTT_DB_USER%"
+      dbPassword: "%WPTT_DB_PASSWORD%"
       tablePrefix: "_wp"
-      domain: "%WP_TT_SITE_HOST%"
-      adminEmail: "%WP_TT_SITE_ADMIN_EMAIL%"
+      domain: "%WPTT_SITE_HOST%"
+      adminEmail: "%WPTT_SITE_ADMIN_EMAIL%"
       title: "Test"
       plugins:
         - "example/plugin.php"

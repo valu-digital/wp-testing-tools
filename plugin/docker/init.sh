@@ -16,9 +16,9 @@ if [ -f init-docker.sh ]; then
     exec ./init-docker.sh
 fi
 
-if [ "${WP_TT_INSTALL_DIR}" != "" -a -f "${WP_TT_INSTALL_DIR}/web/wp-config.php" ]; then
+if [ "${WPTT_INSTALL_DIR}" != "" -a -f "${WPTT_INSTALL_DIR}/web/wp-config.php" ]; then
     >&2 echo "WP installed. You can access it from http://localhost:8080/ and run tests against it using ./docker/shell.sh"
-    cd "${WP_TT_INSTALL_DIR}/web"
+    cd "${WPTT_INSTALL_DIR}/web"
     exec wp server --host=0.0.0.0
 else
     # Otherwise just keep the container running so it can be accessed with docker/shell.sh
