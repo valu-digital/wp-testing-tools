@@ -19,6 +19,8 @@ This project contains following components:
 The example plugin is under the `plugin/` directory. Lets go through it file
 by file and explain the purpose of each.
 
+## Plugin files
+
 ### `composer.json`
 
 This is the main composer file which make your plugin installable using
@@ -29,7 +31,7 @@ other means.
 In it we define this package as a dev requirement under `"require-dev"` with
 `"valu/wp-testing-tools": "^0.2.0"`.
 
-But most interesting part is the `"wp-install"` script under `"scripts"`:
+But the most interesting part is the `"wp-install"` script under `"scripts"`:
 
     wp-install --full --wp-composer-file composer.wp-install.json --env-file .env
 
@@ -88,5 +90,15 @@ The docker directory exposes two scripts for working with the enviroment:
 
 ### `plugin.php` and `src/`
 
-The `plugin.php` is the entry point for your plugin and the `src/` directory
-will contain the actual plugin implementation.
+These are opinionated take on how to structure WordPress plugins with
+Composer Autoloading. If you don't care about that or are adapting existing
+plugin you can just remove these files along with the `"autoload"` config
+from `composer.json`.
+
+But if you do it's highly recommend that you read the comments in
+[plugin.php](/plugin/plugin.php). It contains information on how to ship your
+plugin properly to both composer and non-composer users.
+
+## Using XDebug
+
+### Visual Studio Code
