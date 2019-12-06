@@ -6,7 +6,8 @@ Testing WordPress plugins is PITA. The wp-browser project makes it possible
 but because it requires a working WordPress installation to be usable and
 setting up one is very laborious which is why many plugins especially smaller
 ones omit tests completely. So the humble mission of this project is make
-that barrier go away completely!
+that barrier go away completely so there would be no execuses to not write
+tests for WordPress plugins.
 
 This project contains following components:
 
@@ -99,6 +100,6 @@ But if you do it's highly recommend that you read the comments in
 [plugin.php](/plugin/plugin.php). It contains information on how to ship your
 plugin properly to both composer and non-composer users.
 
-## Using XDebug
+## Using XDebug with Docker
 
 ### Visual Studio Code
