@@ -17,10 +17,10 @@ This project contains following components:
 - Github Action Workflow for continuous integration
 - Example plugin on how to setup all this
 
+## Plugin files
+
 The example plugin is under the `plugin/` directory. Lets go through it file
 by file and explain the purpose of each.
-
-## Plugin files
 
 ### `composer.json`
 
