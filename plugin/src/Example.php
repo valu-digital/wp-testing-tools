@@ -1,7 +1,9 @@
 <?php
 
+namespace Example;
+
 class Example {
-    public static init() {
+    public static function init() {
         define( 'EXAMPLE', 'initialized' );
     }
 }

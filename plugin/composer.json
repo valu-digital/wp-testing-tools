@@ -11,12 +11,11 @@
     }
   ],
   "require-dev": {
-    "valu/wp-testing-tools": "*",
-    "lucatume/wp-browser": "^2.2"
+    "valu/wp-testing-tools": "^0.1.0"
   },
   "autoload": {
     "psr-4": {
-      "Example": "src/"
+      "Example\\": "src/"
     }
   },
   "scripts": {

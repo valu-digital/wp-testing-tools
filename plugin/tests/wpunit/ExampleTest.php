@@ -1,6 +1,6 @@
 <?php
 
-class LockTest extends \Codeception\TestCase\WPTestCase
+class ExampleTest extends \Codeception\TestCase\WPTestCase
 {
     /**
      * @var \WpunitTester

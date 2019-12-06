@@ -97,16 +97,17 @@ if [ "$env_file" != "" ]; then
 fi
 
 
-target="$WP_TOOLS_INSTALL_DIR"
-db_name="$WP_TOOLS_DB_NAME"
-db_user="$WP_TOOLS_DB_USER"
-db_password="$WP_TOOLS_DB_PASSWORD"
-db_host="$WP_TOOLS_DB_HOST"
+target="$WP_TT_INSTALL_DIR"
+db_name="$WP_TT_DB_NAME"
+db_user="$WP_TT_DB_USER"
+db_password="$WP_TT_DB_PASSWORD"
+db_host="$WP_TT_DB_HOST"
+core_version="${WP_TT_CORE_VERSION:-latest}"
 
 if [ "$full_install" = "1" ]; then
-    wp_admin="$WP_TOOLS_SITE_ADMIN_USERNAME"
-    wp_admin_password="$WP_TOOLS_SITE_ADMIN_PASSWORD"
-    site_url="http://$WP_TOOLS_SITE_HOST"
+    wp_admin="$WP_TT_SITE_ADMIN_USERNAME"
+    wp_admin_password="$WP_TT_SITE_ADMIN_PASSWORD"
+    site_url="http://$WP_TT_SITE_HOST"
 fi
 
 mkdir -p "$target"
@@ -148,7 +149,7 @@ get_wp_core() {
         mkdir -p "$wp_core_dir"
         cd "$wp_core_dir"
 
-        wp core download
+        wp core download --version=$core_version
 
         # Remove plugins shipped with the core
         rm -rf wp-content/plugins/hello.php
