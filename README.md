@@ -91,6 +91,9 @@ The docker directory exposes two scripts for working with the enviroment:
 - `./docker/shell.sh`: Once the environment is setup you can use this script
   to enter the testing shell to run `codecept` commands
 
+The plugin directory will be mounted to `/app` so you can make changes from
+the host and they are visible immediately to the container.
+
 ### `plugin.php` and `src/`
 
 These are opinionated take on how to structure WordPress plugins with
