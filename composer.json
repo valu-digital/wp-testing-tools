@@ -11,11 +11,8 @@
     }
   ],
   "support": {
-    "issues": "https://github.com/valu-digital/wp-tools/issues",
-    "source": "https://github.com/valu-digital/wp-tools"
+    "issues": "https://github.com/valu-digital/wp-testing-tools/issues",
+    "source": "https://github.com/valu-digital/wp-testing-tools"
   },
-  "bin": [
-    "tools/wp-install",
-    "tools/wp-plugin-release"
-  ]
+  "bin": ["tools/wp-install", "tools/wp-plugin-release"]
 }
