@@ -33,6 +33,9 @@ RUN echo "[XDebug]" >> ${XDEBUG} \
 ENV PATH="/app/vendor/bin:${PATH}"
 ENV WP_DOCKER=1
 
+# wp-install can be sometimes too slow for composer
+ENV COMPOSER_PROCESS_TIMEOUT=3600
+
 RUN mkdir -p /app
 WORKDIR /app
 
