@@ -48,6 +48,7 @@ It takes few arguments
 - `--env-file`: The .env file to use
 - The `--wp-composer-file` and `--env-file` arguments are optional and the
   example is just showing the defaults
+- For more information see `--help` or the [source](https://github.com/valu-digital/wp-testing-tools/blob/master/tools/wp-install).
 
 ### `composer.wp-install.json`
 
