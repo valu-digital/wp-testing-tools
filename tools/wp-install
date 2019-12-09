@@ -169,12 +169,6 @@ fi
 
 project_name="$(jq -r .name composer.json  | cut -d / -f 2)"
 
-# Enables wp-cli packages defined in composer.wptest.json
-export WP_CLI_PACKAGES_DIR="$target"
-
-# put wp-cli and other composer installed tools to PATH
-export PATH="$(pwd)/vendor/bin:$PATH"
-
 mysql_cli() {
     mysql --host $db_host --user="$db_user" --password="$db_password" $@
 }
