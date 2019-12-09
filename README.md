@@ -64,8 +64,9 @@ location for WordPress. Checkout their content for more information.
 
 ### `codeception.dist.yml`
 
-The Codeception config. If you added WP plugins in `composer.wp-install.json`
-you must add them to the `modules.config.WPLoader.plugins` and
+The Codeception config. You must configure your plugin entry point (among
+with the ones defined in `composer.wp-install.json`) to the
+`modules.config.WPLoader.plugins` and
 `modules.config.WPLoader.activatePlugins` sections to be activated during
 wpunit tests.
 
