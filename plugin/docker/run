@@ -89,6 +89,11 @@ case "${1:-}" in
         shift
         compose $@
     ;;
+    compose-no-init)
+        shift
+        echo "WPTT_NO_INIT=1" >> .env
+        compose $@
+    ;;
     shell)
         shift
         shell $@
