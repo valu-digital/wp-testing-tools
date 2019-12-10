@@ -10,13 +10,31 @@ help() {
 
     Options
 
-        --env-file          Path to a dot env file
-        --full              Do full installation. Only required for functional and acceptance tests
-        --force             Force reinstallation
-        --serve             Serve the installation using wp-cli
-        --status            Print the status of the installation. 'basic' 'full' or 'broken'
-        --wp-composer-file  Path to the composer.json file used for the wp installation. Defaults to composer.wp-install.json
-        --post-install      Path to a script which executed after the full installation in the wp directory
+        --env-file PATH
+            Path to a dot env file
+
+        --wp-composer-file PATH
+            Path to the composer file to be used for WP Defaults to
+            composer.wp-install.json
+
+        --full
+            Do full installation. Only required for functional and acceptance
+            tests
+
+        --force
+            Force reinstallation
+
+        --serve
+            Serve the installation using wp-cli
+
+        --status
+            Print the status of the installation. 'basic' 'full' or 'broken'
+
+        --post-install
+            Path to a script which executed after the full installation in
+            the wp directory but before creating the db dump for functional
+            and acceptance testing. You can WP-CLI to create dummy posts for
+            example.
 
 
     "
