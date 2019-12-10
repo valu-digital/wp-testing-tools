@@ -45,7 +45,7 @@ other plugins here since your plugin users might want to install those by
 other means.
 
 In it we define this package as a dev requirement under `"require-dev"` with
-`"valu/wp-testing-tools": "^0.2.0"`.
+`"valu/wp-testing-tools": "^0.4.0"`.
 
 But the most interesting part is the `"wp-install"` script under `"scripts"`:
 
