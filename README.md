@@ -17,6 +17,21 @@ This project contains following components:
 - Github Action Workflow for continuous integration
 - Example plugin on how to setup all this
 
+## Starting
+
+For new projects you can just copy all from `plugin/` and rename the
+"example" strings.
+
+For existing projects you can install this using composer
+
+    composer require --dev valu/wp-testing-tools
+    # You'll want the wp-browser too
+    composer require --dev lucatume/wp-browser
+
+After installing you can copy the test files to your plugin with
+
+    ./vendor/bin/wptt-configure
+
 ## Plugin files
 
 The example plugin is under the `plugin/` directory. Lets go through it file
