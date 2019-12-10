@@ -1,0 +1,52 @@
+#!/bin/sh
+
+set -eu
+
+root="vendor/valu/wp-testing-tools/plugin"
+
+if [ ! -d "$root" ]; then
+    >&2 echo "Cannot find $root"
+    exit 1
+fi
+
+if [ -d docker ]; then
+    read -p "Will remote existing ./docker/ [y/n]> " remove_docker
+
+    if [ "$remove_docker" != "y" ]; then
+        >&2 echo "Aborted."
+        exit 2
+    else
+        rm -rf docker
+    fi
+
+fi
+
+cp -a "$root/docker" .
+
+if [ ! -f .env.docker ]; then
+    cp "$root/.env.docker" .
+fi
+
+if [ ! -f .env.github ]; then
+    cp "$root/.env.github" .
+fi
+
+if [ ! -f .env.github ]; then
+    cp "$root/.env.github" .
+fi
+
+if [ ! -f codeception.dist.yml ]; then
+    cp "$root/codeception.dist.yml" .
+fi
+
+if [ ! -f composer.wp-install.json ]; then
+    cp "$root/composer.wp-install.json" .
+fi
+
+if [ ! -d .github ]; then
+    cp -a "$root/.github" .
+fi
+
+if [ ! -d tests ]; then
+    cp -a "$root/tests" .
+fi
