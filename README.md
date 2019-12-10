@@ -86,12 +86,14 @@ feel free to open an issue!
 This way the Docker enviroment is upgradeable. Just copy the latest version
 from this repository when you want to update to the latest version.
 
-The docker directory exposes two scripts for working with the enviroment:
+The docker directory exposes a `run` script for working with the enviroment:
 
-- `./docker/compose.sh`: This is a small wrapper over `docker-compose` which
+- `./docker/run compose`: This is a small wrapper over `docker-compose` which
   used to starts the Docker enviroment.
-- `./docker/shell.sh`: Once the environment is setup you can use this script
+- `./docker/run shell`: Once the environment is setup you can use this script
   to enter the testing shell to run `codecept` commands
+- `./docker/run update`: When you update the `valu/wp-testing-tools` composer
+  package this command can be used to update the Docker environment.
 
 The plugin directory will be mounted to `/app` so you can make changes from
 the host and they are visible immediately to the container.
