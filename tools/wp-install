@@ -30,6 +30,9 @@ help() {
         --status
             Print the status of the installation. 'basic' 'full' or 'broken'
 
+        --wp-core-version VERSION
+            WordPress core version to install. Defaults to 'latest'
+
         --post-install
             Path to a script which executed after the full installation in
             the wp directory but before creating the db dump for functional
@@ -47,6 +50,7 @@ wp_composer_file=composer.wp-install.json
 force=
 serve=
 print_status=
+core_version="${WPTT_CORE_VERSION:-latest}"
 
 while true; do
     case "${1:-}" in
@@ -66,6 +70,11 @@ while true; do
     --wp-composer-file)
         shift
         wp_composer_file="$1"
+        shift
+        ;;
+    --wp-core-version)
+        shift
+        core_version="$1"
         shift
         ;;
     --post-install)
@@ -139,7 +148,6 @@ db_name="$WPTT_DB_NAME"
 db_user="$WPTT_DB_USER"
 db_password="$WPTT_DB_PASSWORD"
 db_host="$WPTT_DB_HOST"
-core_version="${WPTT_CORE_VERSION:-latest}"
 
 if [ "$serve" = "1" ]; then
     if [ -f "${WPTT_INSTALL_DIR}/web/wp-config.php" ]; then
