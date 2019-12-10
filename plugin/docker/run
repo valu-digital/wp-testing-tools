@@ -103,7 +103,7 @@ case "${1:-}" in
         update
     ;;
     *)
-        >&2 echo "Bad action $action"
+        >&2 echo "Bad action ${1:-}"
         exit 1
     ;;
 esac
