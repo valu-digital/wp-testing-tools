@@ -270,3 +270,5 @@ if [ "$full_install" = "1" ]; then
 fi
 
 date > "$success_flag"
+
+>&2 echo "WP installed succesfully to $wp_core_dir"
