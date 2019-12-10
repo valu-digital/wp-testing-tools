@@ -19,7 +19,7 @@ This project contains following components:
 
 ## Starting
 
-For new projects you can just copy all from `plugin/` and rename the
+For new projects you can just copy all files from `plugin/` and rename the
 "example" strings.
 
 For existing projects you can install this using composer
