@@ -10,7 +10,7 @@ if [ ! -d "$root" ]; then
 fi
 
 if [ -d docker ]; then
-    read -p "Will remote existing ./docker/ [y/n]> " remove_docker
+    read -p "Will remove existing ./docker/ [y/n]> " remove_docker
 
     if [ "$remove_docker" != "y" ]; then
         >&2 echo "Aborted."
