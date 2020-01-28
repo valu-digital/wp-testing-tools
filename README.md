@@ -128,32 +128,34 @@ plugin properly to both composer and non-composer users.
 
 ### Visual Studio Code
 
-Use the [Remote - Containers][remote] and [PHP Debug][php] extensions.
+Install the [PHP Debug][php] extension.
 
-1. Add launch config
+1. Add launch config to `.vscode/launch.json` or to the global config:
 
 ```json
 {
-  "name": "PHP Listen for XDebug",
-  "type": "php",
-  "request": "launch",
-  "port": 9000
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Docker: PHP Listen for XDebug",
+      "type": "php",
+      "request": "launch",
+      "port": 9000,
+      "pathMappings": {
+        "/app": "${workspaceFolder}"
+      }
+    }
+  ]
 }
 ```
 
-2. Start the container with `docker/composer.sh`. Once running select
-   `Remote-Container: Attach to Running Container...` from the quick menu
-   (cmd/ctrl+p) and selecte your WordPress container ending with `-wp`.
+2. Start the container with `./docker/run compose`
 
-3. Move to the `/app` directory using the `Open Folder...` option
+3. From the VSCode `DEBUG AND RUN` view start the `Docker: PHP Listen for XDebug` launch config
 
-4. Enable the PHP Debug extension for the container
+4. Add break points
 
-5. Start the `PHP Listen for XDebug` launch config from the debug view
-
-6. Add break points
-
-7. Run the tests with `codecept run wpunit` from the VSCode terminal (no need to use `docker/shell.sh`)
+5. Start testing shell `./docker/run shell` and run the tests with `codecept run wpunit`
 
 Profit!
 
