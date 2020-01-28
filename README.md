@@ -17,6 +17,12 @@ This project contains following components:
 - Github Action Workflow for continuous integration
 - Example plugin on how to setup all this
 
+Projects using this setup
+
+- https://github.com/valu-digital/wp-graphql-polylang
+- https://github.com/valu-digital/wp-graphql-lock
+- https://github.com/valu-digital/wp-graphql-offset-pagination
+
 ## Starting
 
 For new projects you can just copy all files from `plugin/` and rename the
