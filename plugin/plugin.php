@@ -11,7 +11,7 @@
 
 
  // To make this plugin work properly for both Composer users and non-composer
- // users we must detect whether the project is using a global autolaoder. We
+ // users we must detect whether the project is using a global autoloader. We
  // can do that by checking whether our autoloadable classes will autoload with
  // class_exists(). If not it means there's no global autoloader in place and
  // the user is not using composer. In that case we can safely require the
