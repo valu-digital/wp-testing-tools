@@ -251,13 +251,20 @@ get_wp_plugins() {
 }
 
 
+
+extra_wp_config="
+define('WP_ENV', 'test');
+require_once __DIR__ . '/../vendor/autoload.php';
+if ( is_readable( __DIR__ . '/../../wp-config-test.php') )  {
+ 	require_once __DIR__ . '/../../wp-config-test.php';
+}
+"
+
 install_wp() {
     (
         cd "$wp_core_dir"
 
-        extra_php="require_once __DIR__ . '/../vendor/autoload.php';"
-
-        echo "$extra_php" | wp config create \
+        echo "$extra_wp_config" | wp config create \
             --dbname="$db_name" \
             --dbuser="$db_user" \
             --dbpass="$db_password" \
