@@ -171,4 +171,4 @@ Profit!
 
 ### PHPStorm
 
-Plese contribute?
+Please contribute?
