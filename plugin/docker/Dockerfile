@@ -1,18 +1,20 @@
 FROM ubuntu:bionic
 
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get update \
-    && apt-get install --no-install-recommends -y \
-    php-cli \
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y software-properties-common && \
+    add-apt-repository ppa:ondrej/php && \
+    apt-get update && \
+    apt-get install --no-install-recommends -y \
+    php7.3-cli \
     curl \
-    php-cli \
-    php-curl \
-    php-gd \
-    php-mbstring \
-    php-zip \
-    php-dom \
-    php-mysql \
-    php-xdebug \
+    php7.3-curl \
+    php7.3-gd \
+    php7.3-mbstring \
+    php7.3-zip \
+    php7.3-dom \
+    php7.3-mysql \
+    php7.3-xdebug \
     git \
     zip \
     unzip \
@@ -21,9 +23,9 @@ RUN apt-get update \
     ca-certificates \
     mariadb-client
 
-RUN curl -L https://github.com/composer/composer/releases/download/1.9.1/composer.phar -o /usr/local/bin/composer && chmod +x /usr/local/bin/composer
+RUN curl -L https://github.com/composer/composer/releases/download/1.10.5/composer.phar -o /usr/local/bin/composer && chmod +x /usr/local/bin/composer
 
-ARG XDEBUG=/etc/php/7.2/cli/conf.d/20-xdebug.ini
+ARG XDEBUG=/etc/php/7.3/cli/conf.d/20-xdebug.ini
 RUN echo "[XDebug]" >> ${XDEBUG} \
     && echo "xdebug.remote_enable = 1" >> ${XDEBUG} \
     && echo "xdebug.remote_autostart = 1" >> ${XDEBUG} \
