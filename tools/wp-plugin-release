@@ -58,14 +58,12 @@ git push origin master:master
 git push origin --tags
 git push origin master:stable -f
 
-range="v${new_version}...v${current_version}"
-
 echo
 echo
-git log --format='- %s %h' $range | sed 1,1d
+git log --format='- %s %h' "v${new_version}...v${current_version}" | sed 1,1d
 echo
 echo
-echo "All changes $source/compare/${range}"
+echo "All changes $source/compare/v${current_version}...v${new_version}"
 echo
 echo
 
