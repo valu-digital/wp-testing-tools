@@ -283,6 +283,16 @@ install_wp() {
 
         wp rewrite structure '/%postname%/'
 
+        mkdir -p "$wp_core_dir/wp-content/mu-plugins"
+        cat > "$wp_core_dir/wp-content/mu-plugins/wptt.php" << PHP
+<?php
+
+if (is_readable(__DIR__ . '/../../../../tests/wptt-mu-plugin.php')) {
+    require_once __DIR__ . '/../../../../tests/wptt-mu-plugin.php';
+}
+PHP
+
+
         cd wp-content/plugins
 
         # activate all plugins
