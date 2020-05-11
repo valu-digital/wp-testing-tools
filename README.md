@@ -130,6 +130,14 @@ But if you do it's highly recommend that you read the comments in
 [plugin.php](/plugin/plugin.php). It contains information on how to ship your
 plugin properly to both composer and non-composer users.
 
+## Customizing the WP install for Functiontal Tests
+
+You can add a `tests/wptt-wp-config.php` which is required in the install's
+`wp-config.php` if it is readable.
+
+You can also add `tests/wptt-mu-plugin.php` which is loaded as a mu-plugin in
+the install if it is readable.
+
 ## Using XDebug with Docker
 
 ### Visual Studio Code
