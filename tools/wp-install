@@ -254,6 +254,7 @@ get_wp_plugins() {
 
 extra_wp_config="
 define('WP_ENV', 'test');
+define('WPTT_INSTALL', true);
 require_once __DIR__ . '/../vendor/autoload.php';
 if ( is_readable( __DIR__ . '/../../wp-config-test.php') )  {
  	require_once __DIR__ . '/../../wp-config-test.php';
