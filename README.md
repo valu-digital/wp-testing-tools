@@ -19,6 +19,7 @@ This project contains following components:
 
 Projects using this setup
 
+- https://github.com/valu-digital/wp-graphql-cache
 - https://github.com/valu-digital/wp-graphql-polylang
 - https://github.com/valu-digital/wp-graphql-lock
 - https://github.com/valu-digital/wp-graphql-offset-pagination
