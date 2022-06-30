@@ -206,11 +206,6 @@ src_dir="$(pwd)"
 
 type="$(jq -r .type composer.json)"
 
-if [ "$type" != "wordpress-plugin" ]; then
-	>&2 echo "Only wordpress plugins are supported for now. Set \"type\" to \"wordpress-plugin\" in composer.json"
-	exit 1
-fi
-
 project_name="$(jq -r .name composer.json  | cut -d / -f 2)"
 
 mysql_cli() {
@@ -245,8 +240,23 @@ get_wp_plugins() {
         cp "$wp_composer_file" "$target/composer.json"
         cd "$target"
         composer install
+    )
+}
 
-        ln -fs ../../../.. "${wp_core_dir}/wp-content/plugins/$project_name"
+sync_project_to_wp(){
+    (
+        if [ "$type" == "wordpress-plugin" ]; then
+	        ln -fs ../../../.. "${wp_core_dir}/wp-content/plugins/$project_name"
+	        return
+        fi
+        if [ "$type" == "wordpress-muplugin" ]; then
+	        ln -fs ../../../.. "${wp_core_dir}/wp-content/plugins/$project_name"
+	        return
+        fi
+        if [ "$type" == "wordpress-theme" ]; then
+	        ln -fs ../../../.. "${wp_core_dir}/wp-content/plugins/$project_name"
+	        return
+        fi
     )
 }
 
@@ -331,6 +341,7 @@ fi
 create_db
 get_wp_core
 get_wp_plugins
+sync_project_to_wp
 
 if [ "$full_install" = "1" ]; then
     install_wp
