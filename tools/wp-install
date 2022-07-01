@@ -250,6 +250,7 @@ sync_project_to_wp(){
 	        return
         fi
         if [ "$type" == "wordpress-muplugin" ]; then
+	        mkdir "${wp_core_dir}/wp-content/mu-plugins"
 	        ln -fs ../../../.. "${wp_core_dir}/wp-content/plugins/$project_name"
 	        return
         fi
