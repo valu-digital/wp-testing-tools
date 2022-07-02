@@ -245,16 +245,16 @@ get_wp_plugins() {
 
 sync_project_to_wp(){
     (
-        if [ "$type" == "wordpress-plugin" ]; then
+        if [ "$type" = "wordpress-plugin" ]; then
 	        ln -fs ../../../.. "${wp_core_dir}/wp-content/plugins/$project_name"
 	        return
         fi
-        if [ "$type" == "wordpress-muplugin" ]; then
+        if [ "$type" = "wordpress-muplugin" ]; then
 	        mkdir "${wp_core_dir}/wp-content/mu-plugins"
 	        ln -fs ../../../.. "${wp_core_dir}/wp-content/mu-plugins/$project_name"
 	        return
         fi
-        if [ "$type" == "wordpress-theme" ]; then
+        if [ "$type" = "wordpress-theme" ]; then
 	        ln -fs ../../../.. "${wp_core_dir}/wp-content/themes/$project_name"
 	        return
         fi
